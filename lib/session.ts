@@ -13,7 +13,7 @@ type Session = { email: string; role: 'admin' }
 export async function createSession(email: string) {
   const token = await new SignJWT({ email, role: 'admin' })
     .setProtectedHeader({ alg: 'HS256' }).setIssuedAt().setExpirationTime('7d').sign(getSecret())
-  ;(await cookies()).set(COOKIE_NAME, token, { httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 7 })
+  ;(await cookies()).set(COOKIE_NAME, token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 7 })
 }
 
 export async function getSession(): Promise<Session | null> {
