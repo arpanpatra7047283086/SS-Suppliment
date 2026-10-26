@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const productSchema = z.object({ name: z.string().min(2), slug: z.string().min(2), category: z.string().min(2), description: z.string().min(5), price: z.coerce.number().nonnegative(), stock: z.coerce.number().int().nonnegative(), imageUrl: z.string().url().optional().or(z.literal('')) })
-type ProductForm = z.infer<typeof productSchema>
+type ProductForm = z.input<typeof productSchema>
 
 export default function AdminPage() {
   const [message, setMessage] = useState(''); const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductForm>({ resolver: zodResolver(productSchema) })

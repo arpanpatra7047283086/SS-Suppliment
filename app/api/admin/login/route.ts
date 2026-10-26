@@ -9,8 +9,8 @@ export async function POST(request: Request) {
   let body: unknown
   try { body = await request.json() } catch { return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 }) }
   const parsed = schema.safeParse(body)
-  const configuredEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase()
-  const passwordHash = process.env.ADMIN_PASSWORD_HASH
+  const configuredEmail = (process.env.ADMIN_EMAIL || process.env.DEFAULT_ADMIN_EMAIL)?.trim().toLowerCase()
+  const passwordHash = process.env.ADMIN_PASSWORD_HASH || process.env.DEFAULT_ADMIN_PASSWORD
   if (!parsed.success || !configuredEmail || !passwordHash) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   const valid = parsed.data.email === configuredEmail && await bcrypt.compare(parsed.data.password, passwordHash)
   if (!valid) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })

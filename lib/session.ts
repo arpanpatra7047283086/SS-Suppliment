@@ -3,8 +3,8 @@ import { cookies } from 'next/headers'
 
 const COOKIE_NAME = 'ss_session'
 function getSecret() {
-  const rawSecret = process.env.AUTH_SECRET
-  if (!rawSecret || rawSecret.length < 32) throw new Error('AUTH_SECRET must be configured with at least 32 characters')
+  const rawSecret = process.env.AUTH_SECRET || process.env.SECRET_KEY || process.env.DJANGO_SECRET_KEY
+  if (!rawSecret || rawSecret.length < 32) throw new Error('AUTH_SECRET, SECRET_KEY, or DJANGO_SECRET_KEY must be configured with at least 32 characters')
   return new TextEncoder().encode(rawSecret)
 }
 

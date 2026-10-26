@@ -4,8 +4,8 @@ const globalForMongo = globalThis as typeof globalThis & { __ssMongoClientPromis
 let indexesReady: Promise<void> | undefined
 
 async function getClient() {
-  const uri = process.env.MONGODB_URI
-  if (!uri) throw new Error('MONGODB_URI is not configured')
+  const uri = process.env.MONGODB_URI || process.env.MONGODB_CONNECTION_STRING
+  if (!uri) throw new Error('MONGODB_URI or MONGODB_CONNECTION_STRING is not configured')
   if (!globalForMongo.__ssMongoClientPromise) globalForMongo.__ssMongoClientPromise = new MongoClient(uri).connect()
   return globalForMongo.__ssMongoClientPromise
 }
