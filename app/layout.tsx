@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'SS Supplement — Understand more',
-  description: 'A calmer way to understand your documents, notes, and research with grounded answers.',
+  title: 'SS Supplement — Multi-Shop Supplement Management',
+  description: 'Manage supplement products, inventory, orders, sales, and multiple shop locations from one secure workspace.',
   generator: 'v0.app',
 }
 

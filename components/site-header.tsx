@@ -28,7 +28,7 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
         <Link href="#faq" className="nav-link">FAQs</Link>
       </nav>
       <div className="flex items-center gap-2.5">
-        <Link href="#ask" className="ask-button"><MessageCircle className="size-4" /> <span className="hidden sm:inline">Ask AI</span></Link>
+        <Link href="#ask" className="ask-button"><MessageCircle className="size-4" /> <span className="hidden sm:inline">Dashboard</span></Link>
         <Link href="/login" className="sign-button">Sign in</Link>
       </div>
     </header>
